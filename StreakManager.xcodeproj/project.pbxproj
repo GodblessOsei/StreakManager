@@ -6,14 +6,77 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4E81C2392F2A95CE0061B921 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E81C2382F2A95CE0061B921 /* WidgetKit.framework */; };
+		4E81C23B2F2A95CE0061B921 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E81C23A2F2A95CE0061B921 /* SwiftUI.framework */; };
+		4E81C2482F2A95CF0061B921 /* StreakWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4E81C2362F2A95CE0061B921 /* StreakWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4E81C2462F2A95CF0061B921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E81C21C2F2A92330061B921 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E81C2352F2A95CE0061B921;
+			remoteInfo = StreakWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4E81C24D2F2A95CF0061B921 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4E81C2482F2A95CF0061B921 /* StreakWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4E81C2242F2A92330061B921 /* StreakManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreakManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E81C2362F2A95CE0061B921 /* StreakWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StreakWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E81C2382F2A95CE0061B921 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4E81C23A2F2A95CE0061B921 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4E81C2502F2A995F0061B921 /* StreakWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StreakWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4E81C2492F2A95CF0061B921 /* Exceptions for "StreakWidget" folder in "StreakWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4E81C2352F2A95CE0061B921 /* StreakWidgetExtension */;
+		};
+		4E81C2582F2A9B110061B921 /* Exceptions for "StreakManager" folder in "StreakWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				GymVisit.swift,
+				StreakManager.swift,
+			);
+			target = 4E81C2352F2A95CE0061B921 /* StreakWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4E81C2262F2A92330061B921 /* StreakManager */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4E81C2582F2A9B110061B921 /* Exceptions for "StreakManager" folder in "StreakWidgetExtension" target */,
+			);
 			path = StreakManager;
+			sourceTree = "<group>";
+		};
+		4E81C23C2F2A95CE0061B921 /* StreakWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4E81C2492F2A95CF0061B921 /* Exceptions for "StreakWidget" folder in "StreakWidgetExtension" target */,
+			);
+			path = StreakWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +89,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4E81C2332F2A95CE0061B921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E81C23B2F2A95CE0061B921 /* SwiftUI.framework in Frameworks */,
+				4E81C2392F2A95CE0061B921 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		4E81C21B2F2A92330061B921 = {
 			isa = PBXGroup;
 			children = (
+				4E81C2502F2A995F0061B921 /* StreakWidgetExtension.entitlements */,
 				4E81C2262F2A92330061B921 /* StreakManager */,
+				4E81C23C2F2A95CE0061B921 /* StreakWidget */,
+				4E81C2372F2A95CE0061B921 /* Frameworks */,
 				4E81C2252F2A92330061B921 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +116,18 @@
 			isa = PBXGroup;
 			children = (
 				4E81C2242F2A92330061B921 /* StreakManager.app */,
+				4E81C2362F2A95CE0061B921 /* StreakWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4E81C2372F2A95CE0061B921 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4E81C2382F2A95CE0061B921 /* WidgetKit.framework */,
+				4E81C23A2F2A95CE0061B921 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +140,12 @@
 				4E81C2202F2A92330061B921 /* Sources */,
 				4E81C2212F2A92330061B921 /* Frameworks */,
 				4E81C2222F2A92330061B921 /* Resources */,
+				4E81C24D2F2A95CF0061B921 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4E81C2472F2A95CF0061B921 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4E81C2262F2A92330061B921 /* StreakManager */,
@@ -69,6 +156,28 @@
 			productName = StreakManager;
 			productReference = 4E81C2242F2A92330061B921 /* StreakManager.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4E81C2352F2A95CE0061B921 /* StreakWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E81C24A2F2A95CF0061B921 /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */;
+			buildPhases = (
+				4E81C2322F2A95CE0061B921 /* Sources */,
+				4E81C2332F2A95CE0061B921 /* Frameworks */,
+				4E81C2342F2A95CE0061B921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4E81C23C2F2A95CE0061B921 /* StreakWidget */,
+			);
+			name = StreakWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = StreakWidgetExtension;
+			productReference = 4E81C2362F2A95CE0061B921 /* StreakWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +190,9 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					4E81C2232F2A92330061B921 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					4E81C2352F2A95CE0061B921 = {
 						CreatedOnToolsVersion = 26.0;
 					};
 				};
@@ -100,12 +212,20 @@
 			projectRoot = "";
 			targets = (
 				4E81C2232F2A92330061B921 /* StreakManager */,
+				4E81C2352F2A95CE0061B921 /* StreakWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4E81C2222F2A92330061B921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E81C2342F2A95CE0061B921 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +242,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4E81C2322F2A95CE0061B921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4E81C2472F2A95CF0061B921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E81C2352F2A95CE0061B921 /* StreakWidgetExtension */;
+			targetProxy = 4E81C2462F2A95CF0061B921 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4E81C22D2F2A92350061B921 /* Debug */ = {
@@ -249,8 +384,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StreakManager/StreakManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2223382ZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -280,8 +417,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StreakManager/StreakManager.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2223382ZZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -306,6 +445,68 @@
 			};
 			name = Release;
 		};
+		4E81C24B2F2A95CF0061B921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2223382ZZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.nyu.StreakManager.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4E81C24C2F2A95CF0061B921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = StreakWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G2223382ZZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StreakWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = StreakWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.nyu.StreakManager.StreakWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -323,6 +524,15 @@
 			buildConfigurations = (
 				4E81C2302F2A92350061B921 /* Debug */,
 				4E81C2312F2A92350061B921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E81C24A2F2A95CF0061B921 /* Build configuration list for PBXNativeTarget "StreakWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E81C24B2F2A95CF0061B921 /* Debug */,
+				4E81C24C2F2A95CF0061B921 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
