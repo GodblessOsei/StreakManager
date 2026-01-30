@@ -107,4 +107,10 @@ class StreakDataManager {
         
         return streak
     }
+    
+    func allVisitedDates() -> Set<Date> {
+        let descriptor = FetchDescriptor<GymVisit>()
+        guard let visits = try? context.fetch(descriptor) else { return [] }
+        return Set(visits.map { $0.date })
+    }
 }
