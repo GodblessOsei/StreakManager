@@ -8,6 +8,8 @@
 import Foundation
 import SwiftData
 
+import WidgetKit
+
 @MainActor
 class StreakDataManager {
     static let shared = StreakDataManager()
@@ -47,6 +49,7 @@ class StreakDataManager {
         let visit = GymVisit(date: today)
         context.insert(visit)
         try? context.save()
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     func removeVisitToday() {
@@ -59,6 +62,7 @@ class StreakDataManager {
         if let visits = try? context.fetch(descriptor) {
             visits.forEach { context.delete($0) }
             try? context.save()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

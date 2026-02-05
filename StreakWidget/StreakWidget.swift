@@ -8,77 +8,148 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
-    }
+// MARK: - Timeline Entry
+// This holds the data for a single "snapshot" of your widget
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+struct StreakEntry: TimelineEntry {
+    let date: Date
+    let streak: Int
+    let loggedToday: Bool
+}
+
+// MARK: - Timeline Provider
+// This tells iOS what to display and when to refresh
+
+struct StreakTimelineProvider: TimelineProvider {
+    
+    // Placeholder shown while widget loads
+    func placeholder(in context: Context) -> StreakEntry {
+        StreakEntry(date: .now, streak: 0, loggedToday: false)
+    }
+    
+    // Quick snapshot for widget gallery preview
+    func getSnapshot(in context: Context, completion: @escaping (StreakEntry) -> Void) {
+        let entry = StreakEntry(date: .now, streak: 7, loggedToday: true)
         completion(entry)
     }
-
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-            entries.append(entry)
+    
+    // The actual timeline - this is where real data comes in
+        func getTimeline(in context: Context, completion: @escaping (Timeline<StreakEntry>) -> Void) {
+            Task { @MainActor in
+                // Fetch current data from shared storage
+                let streak = StreakDataManager.shared.currentStreak()
+                let loggedToday = StreakDataManager.shared.hasVisitedToday()
+                
+                let entry = StreakEntry(
+                    date: .now,
+                    streak: streak,
+                    loggedToday: loggedToday
+                )
+                
+                // Refresh at midnight (when streak status could change)
+                let midnight = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: .now)!)
+                
+                let timeline = Timeline(entries: [entry], policy: .after(midnight))
+                completion(timeline)
+            }
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
-    }
-
-//    func relevances() async -> WidgetRelevances<Void> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let emoji: String
-}
+// MARK: - Widget Views
 
-struct StreakWidgetEntryView : View {
-    var entry: Provider.Entry
-
+struct StreakWidgetView: View {
+    var entry: StreakEntry
+    
+    @Environment(\.widgetFamily) var family
+    
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+        switch family {
+        case .systemSmall:
+            smallWidget
+        case .systemMedium:
+            mediumWidget
+        default:
+            smallWidget
         }
     }
+    
+    private var smallWidget: some View {
+        VStack(spacing: 4) {
+            Image(systemName: "flame.fill")
+                .font(.system(size: 32))
+                .foregroundStyle(.orange)
+            
+            Text("\(entry.streak)")
+                .font(.system(size: 44, weight: .bold))
+                .foregroundStyle(.primary)
+            
+            Text(entry.streak == 1 ? "day" : "days")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .containerBackground(.fill.tertiary, for: .widget)
+    }
+    
+    private var mediumWidget: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Gym Streak")
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text("\(entry.streak)")
+                        .font(.system(size: 56, weight: .bold))
+                    Text(entry.streak == 1 ? "day" : "days")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                }
+                
+                if entry.loggedToday {
+                    Label("Logged today", systemImage: "checkmark.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(.green)
+                } else {
+                    Label("Not logged yet", systemImage: "circle")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            
+            Spacer()
+            
+            Image(systemName: "flame.fill")
+                .font(.system(size: 48))
+                .foregroundStyle(.orange)
+        }
+        .padding()
+        .containerBackground(.fill.tertiary, for: .widget)
+    }
 }
+
+// MARK: - Widget Configuration
 
 struct StreakWidget: Widget {
     let kind: String = "StreakWidget"
-
+    
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                StreakWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                StreakWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+        StaticConfiguration(kind: kind, provider: StreakTimelineProvider()) { entry in
+            StreakWidgetView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Gym Streak")
+        .description("Track your gym consistency streak.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
 #Preview(as: .systemSmall) {
     StreakWidget()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    StreakEntry(date: .now, streak: 5, loggedToday: true)
+}
+
+#Preview(as: .systemMedium) {
+    StreakWidget()
+} timeline: {
+    StreakEntry(date: .now, streak: 12, loggedToday: false)
 }
